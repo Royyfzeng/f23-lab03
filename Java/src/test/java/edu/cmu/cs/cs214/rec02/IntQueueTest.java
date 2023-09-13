@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
-
 /**
  * TODO: Write more unit tests to test the implementation of ArrayIntQueue
  * for the {@link LinkedIntQueue} and
@@ -33,8 +32,8 @@ public class IntQueueTest {
     @Before
     public void setUp() {
         // comment/uncomment these lines to test each class
-        mQueue = new LinkedIntQueue();
-//        mQueue = new ArrayIntQueue();
+        // mQueue = new LinkedIntQueue();
+        mQueue = new ArrayIntQueue();
 
         testList = new ArrayList<>(List.of(1, 2, 3));
     }
@@ -47,6 +46,7 @@ public class IntQueueTest {
     @Test
     public void testNotEmpty() {
         mQueue.enqueue(1);
+        // System.out.println(mQueue.isEmpty());
         assertFalse(mQueue.isEmpty());
     }
 
@@ -100,5 +100,56 @@ public class IntQueueTest {
         }
     }
 
+    @Test
+    public void testConstructor() {
+        ArrayIntQueue queue = new ArrayIntQueue();
+        assertTrue(queue.isEmpty());
+        assertEquals(0, queue.size());
+    }
+
+    @Test
+    public void testEnqueueAndDequeue() {
+        ArrayIntQueue queue = new ArrayIntQueue();
+
+        assertTrue(queue.enqueue(1));
+        assertTrue(queue.enqueue(2));
+
+        assertEquals(1, queue.dequeue().intValue());
+        assertEquals(2, queue.dequeue().intValue());
+
+        assertTrue(queue.isEmpty());
+        assertEquals(null, queue.dequeue());
+        assertEquals(0, queue.size());
+    }
+
+    @Test
+    public void testClear() {
+        ArrayIntQueue queue = new ArrayIntQueue();
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.clear();
+        assertTrue(queue.isEmpty());
+        assertEquals(0, queue.size());
+    }
+
+    @Test
+    public void testEnsureCapacity() {
+        for (int i = 0; i < 9; i ++) {
+            mQueue.enqueue(i);
+        }
+        // 0 1 2 3 4 5 6 7 8
+        for (int i = 0; i < 3; i ++) {
+            mQueue.dequeue();
+        }
+        // 3 4 5 6 7 8
+        for (int i = 9; i < 19; i ++) {
+            mQueue.enqueue(i);
+        }
+        
+        for (int i = 3; i <= 18; i ++) {
+            assertEquals(mQueue.dequeue().intValue(), i);
+        }
+        
+    }
 
 }
