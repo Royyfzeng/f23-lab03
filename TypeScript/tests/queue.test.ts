@@ -22,13 +22,28 @@ test("test peek: newly created list should peek null", () => {
 
     expect(createQueue().peek()).toBeNull()
 })
+test("test size: expect empty queue has size 0, and queue with 2 elements has size 2", () => {
+    const queue = createQueue()
+    expect(queue.size()).toEqual(0)
+    queue.enqueue(1)
+    expect(queue.size()).toEqual(1)
+})
 
 test("test peek: queue with 2 element should peek the one that was most recently added", () => {
     const queue = createQueue()
     queue.enqueue(2)
     queue.enqueue(3)
     expect(queue.peek()).toEqual(3)
+    expect(queue.size()).toEqual(0)
 })
+
+// test("test clear: queue with enque and clear should have zero elements", () => {
+//     const queue = createQueue()
+//     queue.enqueue(2)
+//     queue.enqueue(3)
+//     queue.clear()
+//     expect(queue.peek()).toEqual(null)
+// })
 
 let param = [5, 10, 1000000]
 // parameterized test, apply to each value of the parameter
