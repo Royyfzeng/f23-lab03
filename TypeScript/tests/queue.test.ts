@@ -34,16 +34,20 @@ test("test peek: queue with 2 element should peek the one that was most recently
     queue.enqueue(2)
     queue.enqueue(3)
     expect(queue.peek()).toEqual(3)
-    expect(queue.size()).toEqual(0)
+    expect(queue.size()).toEqual(2)
 })
 
-// test("test clear: queue with enque and clear should have zero elements", () => {
-//     const queue = createQueue()
-//     queue.enqueue(2)
-//     queue.enqueue(3)
-//     queue.clear()
-//     expect(queue.peek()).toEqual(null)
-// })
+test("test clear: queue with enque and clear should have zero elements", () => {
+    const queue = createQueue()
+    queue.enqueue(2)
+    queue.enqueue(3)
+    queue.clear()
+    expect(queue.dequeue()).toEqual(null)
+    expect(queue.peek()).toEqual(null)
+    queue.enqueue(2)
+    expect(queue.dequeue()).toEqual(2)
+
+})
 
 let param = [5, 10, 1000000]
 // parameterized test, apply to each value of the parameter
